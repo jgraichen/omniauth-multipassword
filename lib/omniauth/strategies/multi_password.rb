@@ -65,7 +65,6 @@ module OmniAuth
       end
 
       info do
-        OmniAuth.logger.warn " OmniAuth INFO >> " + @authenticator.info.inspect
         if @authenticator and @authenticator.info.is_a?(Hash)
           @authenticator.info
         else
