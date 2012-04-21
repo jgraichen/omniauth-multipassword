@@ -52,13 +52,20 @@ module OmniAuth
           begin
             @authenticator = auth[0].new @app, *auth[1]
             @authenticator.init_authenticator(@request, @env, username)
-            return true if @authenticator.authenticate(username, password)
+            if @authenticator.authenticate(username, password)
+              return true
+            end
           rescue Error => e
             OmniAuth.logger.warn "OmniAuth ERR >>> " + e
           end
           @authenticator = nil
         end
         false
+      end
+
+      def name
+        return @authenticator.name if @authenticator
+        super
       end
 
       info do
