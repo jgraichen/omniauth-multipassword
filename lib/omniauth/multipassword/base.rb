@@ -19,11 +19,13 @@ module OmniAuth
       end
 
       def username
-        request[username_id]
+        @username || request[username_id].to_s
       end
 
-      def request=(request)
-        @request = request
+      def init_authenticator(request, env, username)
+        @request  = request
+        @env      = env
+        @username = username
       end
 
       def callback_phase

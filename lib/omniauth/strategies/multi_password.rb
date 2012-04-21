@@ -32,8 +32,9 @@ module OmniAuth
           end
         end
 
+        args << block if block
         @authenticators ||= []
-        @authenticators  << [ klass, args, block ]
+        @authenticators  << [ klass, args ]
       end
 
       def callback_phase
@@ -49,12 +50,8 @@ module OmniAuth
       def authenticate(username, password)
         @authenticators.each do |auth|
           begin
-            if auth[2]
-              @authenticator = auth[0].new @app, *auth[1], auth[2]
-            else
-              @authenticator = auth[0].new @app, *auth[1]
-            end
-            @authenticator.request = self.request
+            @authenticator = auth[0].new @app, *auth[1]
+            @authenticator.init_authenticator(@request, @env, username)
             return true if @authenticator.authenticate(username, password)
           rescue Error => e
             OmniAuth.logger.warn "OmniAuth ERR >>> " + e
@@ -65,11 +62,9 @@ module OmniAuth
       end
 
       info do
-        if @authenticator and @authenticator.info.is_a?(Hash)
-          @authenticator.info
-        else
-          {}
-        end
+        info = @authenticator.info if @authenticator
+        info = {} unless info.is_a?(Hash)
+        info
       end
     end
   end
