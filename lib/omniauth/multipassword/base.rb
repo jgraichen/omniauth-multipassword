@@ -37,7 +37,7 @@ module OmniAuth
       end
 
       def request_phase
-        OmniAuth::Form.build(:title => options.title, :url => callback_path) do |f|
+        OmniAuth::Form.build(:title => options.title, :url => callback_url) do |f|
           f.text_field     "Username", username_id
           f.password_field "Password", password_id
         end.to_response
