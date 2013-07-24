@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = "A OmniAuth strategy to authenticate using different passwort strategies."
   gem.summary       = "A OmniAuth strategy to authenticate using different passwort strategies."
   gem.homepage      = "https://github.com/jgraichen/omniauth-multipassword"
+  gem.license       = 'MIT'
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
