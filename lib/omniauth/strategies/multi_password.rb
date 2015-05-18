@@ -11,7 +11,7 @@ module OmniAuth
         super(app, *args) do end
 
         if block.arity == 0
-          instance_eval block
+          instance_eval &block
         else
           block.call self
         end
