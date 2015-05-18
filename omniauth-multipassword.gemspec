@@ -3,7 +3,7 @@ require File.expand_path('../lib/omniauth/multipassword/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Jan Graichen"]
-  gem.email         = ["jan.graichen@altimos.de"]
+  gem.email         = ["jg@altimos.de"]
   gem.description   = "A OmniAuth strategy to authenticate using different passwort strategies."
   gem.summary       = "A OmniAuth strategy to authenticate using different passwort strategies."
   gem.homepage      = "https://github.com/jgraichen/omniauth-multipassword"
