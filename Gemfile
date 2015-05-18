@@ -6,4 +6,4 @@ gemspec
 gem 'rake'
 gem 'rack-test'
 gem 'rspec'
-gem 'coveralls'
+gem "codeclimate-test-reporter", require: nil

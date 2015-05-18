@@ -1,10 +1,8 @@
 require 'rspec'
 
 if ENV['CI'] || (defined?(:RUBY_ENGINE) && RUBY_ENGINE != 'rbx')
-  require 'coveralls'
-  Coveralls.wear! do
-    add_filter 'spec'
-  end
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
 end
 
 require 'omniauth-multipassword'
