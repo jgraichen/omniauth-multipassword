@@ -5,7 +5,7 @@
 [![Test Coverage](https://codeclimate.com/github/jgraichen/omniauth-multipassword/badges/coverage.svg)](https://codeclimate.com/github/jgraichen/omniauth-multipassword/coverage)
 
 **omniauth-multipassword** is a [OmniAuth](https://github.com/intridea/omniauth)
-strategy that allows to authenticate agains different password strategies at once.
+strategy that allows to authenticate again different password strategies at once.
 
 
 ## Installation
