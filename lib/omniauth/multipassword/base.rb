@@ -42,7 +42,6 @@ module OmniAuth
           f.password_field "Password", password_id
         end.to_response
       end
-
     end
   end
 end
