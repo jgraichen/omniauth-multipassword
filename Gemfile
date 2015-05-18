@@ -6,4 +6,5 @@ gemspec
 gem 'rake'
 gem 'rack-test'
 gem 'rspec'
-gem "codeclimate-test-reporter", require: nil
+gem 'simplecov'
+gem "codeclimate-test-reporter"

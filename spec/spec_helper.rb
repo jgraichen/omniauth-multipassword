@@ -1,8 +1,13 @@
 require 'rspec'
+require 'simplecov'
 
 if ENV['CI'] || (defined?(:RUBY_ENGINE) && RUBY_ENGINE != 'rbx')
-  require "codeclimate-test-reporter"
-  CodeClimate::TestReporter.start
+  begin
+    require 'codeclimate-test-reporter'
+    CodeClimate::TestReporter.start
+  rescue LoadError
+  end
+  SimpleCov.start
 end
 
 require 'omniauth-multipassword'
