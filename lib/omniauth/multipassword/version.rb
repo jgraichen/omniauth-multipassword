@@ -3,10 +3,10 @@
 module Omniauth
   module Multipassword
     module VERSION
-      MAJOR = 0
-      MINOR = 4
-      PATCH = 2
-      STAGE = nil
+      MAJOR = 2
+      MINOR = 0
+      PATCH = 0
+      STAGE = 'rc1'
 
       def self.to_s
         [MAJOR, MINOR, PATCH, STAGE].reject(&:nil?).join '.'
