@@ -1,36 +1,20 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rack/test'
 
-describe OmniAuth::Strategies::MultiPassword do
+describe OmniAuth::Strategies::MultiPassword do # rubocop:disable RSpec/FilePath
   include Rack::Test::Methods
 
-  class OmniAuth::Strategies::OneTest
-    include OmniAuth::Strategy
-    include OmniAuth::MultiPassword::Base
-
-    def authenticate(username, password)
-      username == 'john' && password == 'secret'
-    end
-  end
-
-  class OmniAuth::Strategies::TwoTest
-    include OmniAuth::Strategy
-    include OmniAuth::MultiPassword::Base
-
-    def authenticate(username, password)
-      username == 'jane' && password == '1234'
-    end
-  end
-
   let(:app) do
-    Rack::Builder.new {
+    Rack::Builder.new do
       use OmniAuth::Test::PhonySession
       use OmniAuth::Strategies::MultiPassword do
         authenticator :one_test
         authenticator :two_test
       end
       run ->(env) { [404, {'Content-Type' => 'text/plain'}, [env['omniauth.auth']['uid'].to_s]] }
-    }.to_app
+    end.to_app
   end
 
   it 'shows login FORM' do

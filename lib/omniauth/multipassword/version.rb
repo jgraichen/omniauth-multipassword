@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Omniauth
   module Multipassword
     module VERSION

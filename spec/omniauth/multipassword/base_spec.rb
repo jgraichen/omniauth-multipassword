@@ -1,48 +1,42 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'rack/test'
 
-describe OmniAuth::MultiPassword::Base do
-  let(:app) { double 'app' }
+describe OmniAuth::MultiPassword::Base do # rubocop:disable RSpec/FilePath
+  subject { strategy }
+
+  let(:app) { instance_double(Proc) }
+  let(:strategy) do
+    OmniAuth::Strategies::OneTest.new(app, *args, &block)
+  end
   let(:args) { [] }
   let(:block) { nil }
 
-  class OmniAuth::Strategy::OneTest
-    include OmniAuth::Strategy
-    include OmniAuth::MultiPassword::Base
-
-    def authenticate(username, password)
-      username == 'john' && password == 'secret'
-    end
-  end
-
-  let(:strategy) do
-    OmniAuth::Strategy::OneTest.new(app, *args, &block)
-  end
-
-  subject { strategy }
-
   describe '#username_id' do
-    subject { strategy.username_id }
+    subject(:username_id) { strategy.username_id }
 
     it 'defaults to :username' do
-      is_expected.to eq :username
+      expect(username_id).to eq :username
     end
 
     context 'when configured' do
-      let(:args) { [{fields: [:user, :pass]}] }
+      let(:args) { [{fields: %i[user pass]}] }
+
       it { is_expected.to eq :user }
     end
   end
 
   describe '#password_id' do
-    subject { strategy.password_id }
+    subject(:password_id) { strategy.password_id }
 
     it 'defaults to :password' do
-      is_expected.to eq :password
+      expect(password_id).to eq :password
     end
 
     context 'when configured' do
-      let(:args) { [{fields: [:user, :pass]}] }
+      let(:args) { [{fields: %i[user pass]}] }
+
       it { is_expected.to eq :pass }
     end
   end
@@ -51,11 +45,11 @@ describe OmniAuth::MultiPassword::Base do
     include Rack::Test::Methods
 
     let(:app) do
-      Rack::Builder.new {
+      Rack::Builder.new do
         use OmniAuth::Test::PhonySession
         use OmniAuth::Strategies::OneTest
         run ->(env) { [404, {'Content-Type' => 'text/plain'}, [env.key?('omniauth.auth').to_s]] }
-      }.to_app
+      end.to_app
     end
 
     it 'shows login FORM' do

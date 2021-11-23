@@ -1,28 +1,25 @@
-require 'rspec'
+# frozen_string_literal: true
 
-if ENV['CI'] || (defined?(:RUBY_ENGINE) && RUBY_ENGINE != 'rbx')
-  begin
-    require 'simplecov'
-    SimpleCov.start
-  rescue LoadError
-  end
+require 'rspec'
+require 'simplecov'
+
+if ENV['CI']
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
+
+SimpleCov.start do
+  add_filter 'spec'
 end
 
 require 'omniauth-multipassword'
 
-Dir[File.expand_path('spec/support/**/*.rb')].each {|f| require f }
-
-# Disable omniauth logger
-class NullLogger < Logger
-  def initialize(*args)
-  end
-
-  def add(*args, &block)
-  end
-end
-
-OmniAuth.config.logger = NullLogger.new
+Dir[File.expand_path('spec/support/**/*.rb')].sort.each {|f| require f }
 
 RSpec.configure do |config|
   config.order = 'random'
+
+  config.before do
+    OmniAuth.config.logger = Logger.new(IO::NULL)
+  end
 end

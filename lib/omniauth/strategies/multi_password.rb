@@ -1,5 +1,7 @@
-require "omniauth"
-require "omniauth/multipassword/base"
+# frozen_string_literal: true
+
+require 'omniauth'
+require 'omniauth/multipassword/base'
 
 module OmniAuth
   module Strategies
@@ -8,12 +10,16 @@ module OmniAuth
       include OmniAuth::MultiPassword::Base
 
       def initialize(app, *args, &block)
-        super(app, *args) do end
+        super(app, *args) do
+          # Do pass an empty block, as otherwise the captured block would be
+          # passed to `super`, but this needs to be evaluate inside this
+          # middleware, not omniauth's Rack builder instance.
+        end
 
-        if block.arity == 0
-          instance_eval &block
+        if block.arity.zero?
+          instance_eval(&block)
         else
-          block.call self
+          yield self
         end
       end
 
@@ -25,16 +31,16 @@ module OmniAuth
       def authenticator(klass, *args, &block)
         unless klass.is_a?(Class)
           begin
-            klass = OmniAuth::Strategies.const_get("#{OmniAuth::Utils.camelize(klass.to_s)}")
+            klass = OmniAuth::Strategies.const_get(OmniAuth::Utils.camelize(klass.to_s).to_s)
           rescue NameError
-            raise LoadError, "Could not find matching strategy for #{klass.inspect}." +
-              "You may need to install an additional gem (such as omniauth-#{klass})."
+            raise LoadError.new("Could not find matching strategy for #{klass.inspect}." \
+                                "You may need to install an additional gem (such as omniauth-#{klass}).")
           end
         end
 
         args << block if block
         @authenticators ||= []
-        @authenticators  << [ klass, args ]
+        @authenticators  << [klass, args]
       end
 
       def callback_phase
@@ -43,7 +49,7 @@ module OmniAuth
         if authenticate(username, password)
           super
         else
-          return fail!(:invalid_credentials)
+          fail!(:invalid_credentials)
         end
       end
 
@@ -52,11 +58,9 @@ module OmniAuth
           begin
             @authenticator = auth[0].new @app, *auth[1]
             @authenticator.init_authenticator(@request, @env, username)
-            if @authenticator.authenticate(username, password)
-              return true
-            end
+            return true if @authenticator.authenticate(username, password)
           rescue Error => e
-            OmniAuth.logger.warn "OmniAuth ERR >>> " + e
+            OmniAuth.logger.warn "OmniAuth ERR >>> #{e}"
           end
           @authenticator = nil
         end
@@ -65,6 +69,7 @@ module OmniAuth
 
       def name
         return @authenticator.name if @authenticator
+
         super
       end
 
