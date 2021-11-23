@@ -12,7 +12,7 @@ group :test do
   gem 'codecov', require: false
   gem 'simplecov', require: false
 
-  gem 'my-rubocop', github: 'jgraichen/my-rubocop'
+  gem 'my-rubocop', github: 'jgraichen/my-rubocop', ref: 'v2'
   gem 'rack-test'
   gem 'rspec', '~> 3.0'
 end
