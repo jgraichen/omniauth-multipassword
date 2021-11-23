@@ -9,10 +9,12 @@ gem 'rake'
 gem 'rake-release'
 
 group :test do
+  gem 'rack-test'
+
+  gem 'rspec', '~> 3.0'
+
   gem 'codecov', require: false
   gem 'simplecov', require: false
 
   gem 'my-rubocop', github: 'jgraichen/my-rubocop', ref: 'v2'
-  gem 'rack-test'
-  gem 'rspec', '~> 3.0'
 end

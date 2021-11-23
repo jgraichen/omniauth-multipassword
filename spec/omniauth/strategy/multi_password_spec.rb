@@ -25,17 +25,20 @@ describe OmniAuth::Strategies::MultiPassword do # rubocop:disable RSpec/FilePath
 
   it 'redirect on all failed strategies' do
     post '/auth/multipassword/callback', username: 'paul', password: 'wrong'
+
     expect(last_response).to be_redirect
     expect(last_response.headers['Location']).to eq '/auth/failure?message=invalid_credentials&strategy=multipassword'
   end
 
   it 'authenticates john' do
     post '/auth/multipassword/callback', username: 'john', password: 'secret'
+
     expect(last_response.body).to eq 'john'
   end
 
   it 'authenticates jane' do
     post '/auth/multipassword/callback', username: 'jane', password: '1234'
+
     expect(last_response.body).to eq 'jane'
   end
 end

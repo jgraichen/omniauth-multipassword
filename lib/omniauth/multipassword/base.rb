@@ -44,6 +44,13 @@ module OmniAuth
           f.password_field 'Password', password_id
         end.to_response
       end
+
+      def other_phase
+        # OmniAuth, by default, disables "GET" requests for security reasons.
+        # This effectively disables showing a password form on a GET request to
+        # the `request_phase`. Instead, we hook the GET requests here.
+        return request_phase if on_request_path?
+      end
     end
   end
 end

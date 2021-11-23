@@ -22,5 +22,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.version       = Omniauth::Multipassword::VERSION
 
-  gem.add_dependency 'omniauth', '~> 1.0'
+  gem.add_dependency 'omniauth', '~> 2.0'
 end
