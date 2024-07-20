@@ -49,7 +49,7 @@ module OmniAuth
         # OmniAuth, by default, disables "GET" requests for security reasons.
         # This effectively disables showing a password form on a GET request to
         # the `request_phase`. Instead, we hook the GET requests here.
-        return request_phase if on_request_path?
+        request_phase if on_request_path?
       end
     end
   end

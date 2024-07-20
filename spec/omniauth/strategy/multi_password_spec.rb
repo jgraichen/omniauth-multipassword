@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'rack/test'
 
-describe OmniAuth::Strategies::MultiPassword do # rubocop:disable RSpec/FilePath
+describe OmniAuth::Strategies::MultiPassword do # rubocop:disable RSpec/SpecFilePathFormat
   include Rack::Test::Methods
 
   let(:app) do

@@ -9,7 +9,7 @@ module Omniauth
       STAGE = 'rc1'
 
       def self.to_s
-        [MAJOR, MINOR, PATCH, STAGE].reject(&:nil?).join '.'
+        [MAJOR, MINOR, PATCH, STAGE].compact.join '.'
       end
     end
   end
