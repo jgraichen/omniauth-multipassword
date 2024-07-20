@@ -1,6 +1,10 @@
 ---
 name: test
-on: push
+on:
+  - push
+  - pull_request
+  - workflow_dispatch
+
 jobs:
   rspec:
     name: "Ruby ${{ matrix.ruby }} / ${{ matrix.gemfile }}"
