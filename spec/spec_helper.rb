@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
 require 'rspec'
-require 'simplecov'
 
-if ENV['CI']
-  require 'codecov'
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
-end
+require 'simplecov'
+require 'simplecov-cobertura'
 
 SimpleCov.start do
   add_filter 'spec'
 end
+
+SimpleCov.formatters = [
+  SimpleCov::Formatter::HTMLFormatter,
+  SimpleCov::Formatter::CoberturaFormatter,
+]
 
 require 'omniauth-multipassword'
 

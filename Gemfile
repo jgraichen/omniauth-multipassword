@@ -15,8 +15,8 @@ group :test do
 
   gem 'rspec', '~> 3.0'
 
-  gem 'codecov', require: false
-  gem 'simplecov', require: false
+  gem 'simplecov'
+  gem 'simplecov-cobertura'
 end
 
 group :development do

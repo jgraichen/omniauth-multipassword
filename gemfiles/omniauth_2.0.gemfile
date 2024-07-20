@@ -10,8 +10,8 @@ gem "omniauth", "~> 2.0.0"
 group :test do
   gem "rack-test"
   gem "rspec", "~> 3.0"
-  gem "codecov", require: false
-  gem "simplecov", require: false
+  gem "simplecov"
+  gem "simplecov-cobertura"
 end
 
 group :development do
