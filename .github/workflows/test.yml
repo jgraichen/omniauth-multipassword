@@ -3,7 +3,7 @@ name: test
 on: push
 jobs:
   rspec:
-    name: "Ruby ${{ matrix.ruby }}"
+    name: "Ruby ${{ matrix.ruby }} / ${{ matrix.gemfile }}"
     runs-on: ubuntu-22.04
 
     strategy:
@@ -17,19 +17,31 @@ jobs:
           - "2.7"
           - "2.6"
           - "2.5"
+        gemfile:
+          - omniauth_2.0
+          - omniauth_2.1
+
+    env:
+      BUNDLE_GEMFILE: gemfiles/${{ matrix.gemfile }}.gemfile
+      BUNDLE_WITHOUT: development
 
     steps:
       - uses: actions/checkout@master
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          bundler-cache: True
+          bundler-cache: true
         env:
-          BUNDLE_WITHOUT: development
           BUNDLE_JOBS: 4
           BUNDLE_RETRY: 3
 
-      - run: bundle exec rspec --color
+      - run: |
+          bundle exec rspec --color --format documentation
+
+      - uses: codecov/codecov-action@v4
+        with:
+          fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   rubocop:
     name: rubocop
@@ -40,7 +52,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
-          bundler-cache: True
+          bundler-cache: true
         env:
           BUNDLE_JOBS: 4
           BUNDLE_RETRY: 3
