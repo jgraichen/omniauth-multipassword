@@ -15,6 +15,8 @@ group :test do
 
   gem 'codecov', require: false
   gem 'simplecov', require: false
+end
 
+group :development do
   gem 'rubocop-config', github: 'jgraichen/rubocop-config', ref: 'v12'
 end
