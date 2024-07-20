@@ -5,6 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ## [Unreleased]
 
+## [2.0.1] - 2024-07-20
+
+### Changed
+
+- Version bump due to wrong tag
+
 ## [2.0.0] - 2024-07-20
 
 ### Added
@@ -16,5 +22,6 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 - Updated strategy to OmniAuth >= 2.0
 - Drop support for Ruby < 2.7
 
-[Unreleased]: https://github.com/jgraichen/omniauth-multipassword/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/jgraichen/omniauth-multipassword/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/jgraichen/omniauth-multipassword/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/jgraichen/omniauth-multipassword/releases/tag/v2.0.0
