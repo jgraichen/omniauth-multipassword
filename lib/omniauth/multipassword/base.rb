@@ -13,15 +13,15 @@ module OmniAuth
       end
 
       def username_id
-        options[:fields][0] || 'username'
+        options.dig(:fields, 0) || 'username'
       end
 
       def password_id
-        options[:fields][1] || 'password'
+        options.dig(:fields, 1) || 'password'
       end
 
       def username
-        @username || request[username_id].to_s
+        @username || request.params[username_id.to_s].to_s
       end
 
       def init_authenticator(request, env, username)
@@ -31,7 +31,7 @@ module OmniAuth
       end
 
       def callback_phase
-        if authenticate(username, request[password_id])
+        if authenticate(username, request.params[password_id.to_s])
           super
         else
           fail!(:invalid_credentials)

@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ### Changes
 
+- Add compatibility with newer Rack and OmniAuth 2.1+
+
 ### Fixes
 
 ### Breaks

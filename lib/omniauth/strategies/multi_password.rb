@@ -44,8 +44,8 @@ module OmniAuth
       end
 
       def callback_phase
-        username = request[username_id].to_s
-        password = request[password_id].to_s
+        username = request.params[username_id.to_s].to_s
+        password = request.params[password_id.to_s].to_s
         if authenticate(username, password)
           super
         else
