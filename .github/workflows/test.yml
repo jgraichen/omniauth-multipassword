@@ -8,7 +8,7 @@ on:
 jobs:
   rspec:
     name: "Ruby ${{ matrix.ruby }} / ${{ matrix.gemfile }}"
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     strategy:
       fail-fast: false
@@ -47,7 +47,7 @@ jobs:
 
   rubocop:
     name: rubocop
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@master
