@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ## [Unreleased]
 
+### Fixed
+
+- Pass GET requests to the app if not on the request path by @larskanis
+
 ## [2.0.1] - 2024-07-20
 
 ### Changed
