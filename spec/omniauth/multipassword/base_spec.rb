@@ -46,6 +46,9 @@ describe OmniAuth::MultiPassword::Base do # rubocop:disable RSpec/SpecFilePathFo
       Rack::Builder.new do
         use OmniAuth::Test::PhonySession
         use OmniAuth::Strategies::OneTest
+        map '/app-ok' do
+          run ->(env) { [200, {'Content-Type' => 'text/plain'}, ['OK']] }
+        end
         run ->(env) { [404, {'Content-Type' => 'text/plain'}, [env.key?('omniauth.auth').to_s]] }
       end.to_app
     end
@@ -65,6 +68,11 @@ describe OmniAuth::MultiPassword::Base do # rubocop:disable RSpec/SpecFilePathFo
     it 'authenticates john with correct password' do
       post '/auth/onetest/callback', username: 'john', password: 'secret'
       expect(last_response.body).to eq 'true'
+    end
+
+    it 'shows app page' do
+      get '/app-ok'
+      expect(last_response.body).to eq 'OK'
     end
   end
 end
