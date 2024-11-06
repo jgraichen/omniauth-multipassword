@@ -5,7 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ## [Unreleased]
 
-### Fixed
+## [2.1.0] - 2024-11-06
+
+### Changed
 
 - Pass GET requests to the app if not on the request path by @larskanis
 
@@ -26,6 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 - Updated strategy to OmniAuth >= 2.0
 - Drop support for Ruby < 2.7
 
-[Unreleased]: https://github.com/jgraichen/omniauth-multipassword/compare/v2.0.1...HEAD
+[Unreleased]: https://github.com/jgraichen/omniauth-multipassword/compare/v2.1.1...HEAD
+[2.1.0]: https://github.com/jgraichen/omniauth-multipassword/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/jgraichen/omniauth-multipassword/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/jgraichen/omniauth-multipassword/releases/tag/v2.0.0

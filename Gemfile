@@ -10,10 +10,10 @@ gem 'appraisal'
 gem 'rake'
 gem 'rake-release'
 
+gem 'rspec', '~> 3.0'
+
 group :test do
   gem 'rack-test'
-
-  gem 'rspec', '~> 3.0'
 
   gem 'simplecov'
   gem 'simplecov-cobertura'
