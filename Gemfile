@@ -20,5 +20,5 @@ group :test do
 end
 
 group :development do
-  gem 'rubocop-config', github: 'jgraichen/rubocop-config', ref: 'b3f233dd0dd06518154dd8c0e5912ed6b03b2338'
+  gem 'rubocop-config', github: 'jgraichen/rubocop-config', ref: '3a72c310f316c3fdd4e3b1638f89e139cf88af47'
 end
