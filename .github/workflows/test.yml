@@ -60,5 +60,6 @@ jobs:
         env:
           BUNDLE_JOBS: 4
           BUNDLE_RETRY: 3
+          BUNDLER_VERSION: 4
 
       - run: bundle exec rubocop --parallel --fail-level E
