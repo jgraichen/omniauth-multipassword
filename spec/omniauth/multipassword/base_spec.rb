@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'rack/test'
 
-describe OmniAuth::MultiPassword::Base do # rubocop:disable RSpec/SpecFilePathFormat  subject { strategy }
+describe OmniAuth::MultiPassword::Base do # rubocop:disable RSpec/SpecFilePathFormat
   let(:app) { instance_double(Proc) }
   let(:strategy) do
     OmniAuth::Strategies::OneTest.new(app, *args, &block)
@@ -47,7 +47,7 @@ describe OmniAuth::MultiPassword::Base do # rubocop:disable RSpec/SpecFilePathFo
         use OmniAuth::Test::PhonySession
         use OmniAuth::Strategies::OneTest
         map '/app-ok' do
-          run ->(env) { [200, {'Content-Type' => 'text/plain'}, ['OK']] }
+          run ->(_env) { [200, {'Content-Type' => 'text/plain'}, ['OK']] }
         end
         run ->(env) { [404, {'Content-Type' => 'text/plain'}, [env.key?('omniauth.auth').to_s]] }
       end.to_app

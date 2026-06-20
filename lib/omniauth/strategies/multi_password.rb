@@ -10,7 +10,7 @@ module OmniAuth
       include OmniAuth::MultiPassword::Base
 
       def initialize(app, *args, &block)
-        super(app, *args) do
+        super do
           # Do pass an empty block, as otherwise the captured block would be
           # passed to `super`, but this needs to be evaluate inside this
           # middleware, not omniauth's Rack builder instance.
@@ -64,6 +64,7 @@ module OmniAuth
           end
           @authenticator = nil
         end
+
         false
       end
 
